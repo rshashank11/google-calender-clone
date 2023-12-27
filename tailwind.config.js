@@ -9,7 +9,10 @@ export default {
     colors: {
       borderColor: "#dadce0",
       white: "white",
-      blueBg: "hsl(200, 80%, 50%)"
+      blueBg: "hsl(200, 80%, 50%)",
+      blue: "blue",
+      red: "red",
+      green: "green"
     }
   },
   plugins: [],
