@@ -7,14 +7,13 @@ const Calender = () => {
     const firstDay = startOfWeek(startOfMonth(currentMonth))
 
     const calenderDays = useMemo(() => {
-     
         const startOfFirstWeek = startOfWeek(startOfMonth(currentMonth))
     const endOfLastWeek = endOfWeek(endOfMonth(currentMonth))
     return eachDayOfInterval({start: startOfFirstWeek, end: endOfLastWeek})
     },[currentMonth]) 
    
   return (
-        <div className="calendar h-full flex flex-col text-[#333] ">
+        <div className="calendar pb-[1px] h-screen flex flex-col text-[#333] ">
     <div className="header p-4 w-full flex items-center">
       <button className="btn mr-2 bg-none border border-borderColor rounded py-2 px-4 text-base cursor-pointer transition-colors delay-[250ms] text-[#333] hover:bg-[#f1f3f4]" onClick={() => setCurrentMonth(new Date())}>Today</button>
       <div>
