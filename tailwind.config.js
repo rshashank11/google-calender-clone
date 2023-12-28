@@ -1,9 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {},
     colors: {
@@ -12,8 +9,9 @@ export default {
       blueBg: "hsl(200, 80%, 50%)",
       blue: "blue",
       red: "red",
-      green: "green"
-    }
+      green: "green",
+      grayTwo: "rgb(95, 99, 104)",
+    },
   },
   plugins: [],
-}
+};
