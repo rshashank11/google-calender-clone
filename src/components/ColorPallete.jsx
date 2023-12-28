@@ -9,7 +9,7 @@ const ColorPallete = () => {
                   name="color"
                   value="blue"
                   id="blue"
-                  checked
+                  
                   className="color-radio w-4 h-4 appearance-none rounded-full border border-blue checked:bg-blue"
                 />
                 
