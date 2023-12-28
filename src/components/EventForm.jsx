@@ -8,6 +8,7 @@ import {
 
 import ColorPallete from "./ColorPallete";
 import { addHours, roundToNearestMinutes } from "date-fns";
+import { TextField } from "@mui/material";
 
 const EventForm = () => {
   const [showTimeField, setShowTimeField] = useState(false);
@@ -26,11 +27,11 @@ const EventForm = () => {
   return (
     <form className="px-4" onSubmit={handleSubmit(onSubmit)}>
       <div>
-        <input
-          className="w-full outline-none my-4 text-2xl border-b border-b-borderColor focus:border-b-2 focus:border-blueBg pl-2 pb-2"
-          placeholder="Add title"
+        <TextField
+          variant="standard"
+          className="w-full my-4 text-2xl"
+          label="Add title"
           name="title"
-          type="text"
           {...register("title")}
         />
       </div>
