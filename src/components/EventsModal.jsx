@@ -21,7 +21,7 @@ const EventsModal = ({ day, isModalOpen, setIsModalOpen, children }) => {
       >
         <div>
           <div className="modal-title">
-            <div className="modal-title h-10 bg-borderColor flex items-center justify-between px-4 text-grayTwo">
+            <div className="modal-title h-10 rounded-t-xl bg-borderColor flex items-center justify-between px-4 text-grayTwo">
               <h1>{format(day, "iiii, MMMM d")}</h1>
               <button
                 className="close-btn text-2xl"
