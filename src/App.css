@@ -5,8 +5,9 @@
   color: black;
   border: none;
   outline: none;
-  width: 65%;
-  height: 65%;
+  width: 400px;
+  height: 350px;
+  border-radius: 12px;
 }
 
 .overlay {
