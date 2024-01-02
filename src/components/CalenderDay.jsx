@@ -6,14 +6,26 @@ import {
   isSameWeek,
   isToday,
 } from "date-fns";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import EventsModal from "./EventsModal";
+import { useSelector } from "react-redux";
+import "../index.css";
 
 const CalenderDay = ({ day, firstDay }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   function openModal() {
     setIsModalOpen(true);
   }
+
+  const events = useSelector((state) => state.event.eventInfo);
+  const allDayEvents = useMemo(() => {
+    return events.filter((event) => event.allDay == true);
+  }, [events]);
+  const timedEvents = useMemo(() => {
+    return events.filter((event) => event.allDay == false);
+  }, [events]);
+
+  // console.log(new Date(JSON.parse(allDayEvents[0].day)));
 
   return (
     <>
@@ -48,6 +60,55 @@ const CalenderDay = ({ day, firstDay }) => {
             >
               {format(day, "d")}
             </div>
+          </div>
+          <div className="events flex flex-col gap-2 flex-grow overflow-hidden">
+            {allDayEvents.length > 0 &&
+              allDayEvents.map((event, index) => {
+                if (
+                  new Date(JSON.parse(event.day)).toString() == day.toString()
+                ) {
+                  return (
+                    <button
+                      style={{ backgroundColor: `${event.color}` }}
+                      key={index}
+                      className={`bg-${event.color} flex 
+                       items-center overflow-hidden whitespace-nowrap cursor-pointer flex-shrink-0  w-full border-none text-sm p-0 text-white py-[0.15rem] font-semibold px-1 rounded-[0.25rem]`}
+                    >
+                      <div className="event-name mr-2">{event.title}</div>
+                    </button>
+                  );
+                }
+              })}
+
+            {timedEvents.length > 0 &&
+              timedEvents.map((event, index) => {
+                if (
+                  new Date(JSON.parse(event.day)).toString() == day.toString()
+                ) {
+                  return (
+                    <button
+                      key={index}
+                      style={{ backgroundColor: `${event.color}` }}
+                      className={`bg-${event.color} flex items-center overflow-hidden whitespace-nowrap cursor-pointer flex-shrink-0 py-[0.15rem] w-full border-none text-sm p-0 font-semibold text-white rounded-[0.15rem]`}
+                    >
+                      <div className="mr-2">
+                        {format(
+                          new Date(JSON.parse(event.startTime)),
+                          "h a"
+                        ).toString()}{" "}
+                        -{" "}
+                        {format(
+                          new Date(JSON.parse(event.endTime)),
+                          "h a"
+                        ).toString()}
+                      </div>
+                      <div className="event-name overflow-hidden mr-2">
+                        {event.title}
+                      </div>
+                    </button>
+                  );
+                }
+              })}
           </div>
         </div>
       </EventsModal>
