@@ -11,6 +11,8 @@ import {
 } from "date-fns";
 import { TextField, ThemeProvider, createTheme } from "@mui/material";
 import "../App.css";
+import { useDispatch } from "react-redux";
+import { setEvent } from "../utils/eventSlice";
 
 const theme = createTheme({
   components: {
@@ -30,7 +32,7 @@ const theme = createTheme({
   },
 });
 
-const EventForm = () => {
+const EventForm = ({ day }) => {
   const [showTimeField, setShowTimeField] = useState(false);
   const [disableTimeField, setDisableTimeField] = useState(false);
   const [showDescription, setShowDescription] = useState(false);
@@ -40,10 +42,11 @@ const EventForm = () => {
     })
   );
   const [endTime, setEndTime] = useState(
-    roundToNearestMinutes(addMinutes(new Date().getTime(), 30), {
+    roundToNearestMinutes(addMinutes(startTime, 30), {
       nearestTo: 30,
     })
   );
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -55,14 +58,32 @@ const EventForm = () => {
       startTime: roundToNearestMinutes(addMinutes(new Date().getTime(), 5), {
         nearestTo: 30,
       }),
-      endTime: roundToNearestMinutes(addMinutes(new Date().getTime(), 30), {
+      endTime: roundToNearestMinutes(addHours(startTime, 1), {
         nearestTo: 30,
       }),
+      allDay: false,
     },
   });
 
-  function onSubmit(data) {
-    console.log(data);
+  async function onSubmit({
+    title,
+    description,
+    startTime,
+    endTime,
+    color,
+    allDay,
+  }) {
+    dispatch(
+      setEvent({
+        day: JSON.stringify(day),
+        startTime: allDay ? null : JSON.stringify(startTime),
+        endTime: allDay ? null : JSON.stringify(endTime),
+        title: await title,
+        description: await description,
+        color: await color,
+        allDay: allDay,
+      })
+    );
   }
   return (
     <form className="px-4" onSubmit={handleSubmit(onSubmit)}>
@@ -117,6 +138,8 @@ const EventForm = () => {
                 control={control}
                 render={({ field }) => (
                   <TimePicker
+                    minTime={startTime}
+                    defaultValue={endTime}
                     value={endTime}
                     onChange={field.onChange}
                     // {...register("endTime")}
@@ -136,8 +159,9 @@ const EventForm = () => {
               className="h-5 w-5"
               type="checkbox"
               onClick={() => setDisableTimeField(!disableTimeField)}
-              name="all-day"
+              name="allDay"
               id="all-day"
+              {...register("allDay")}
             />
             <label className="text-sm font-medium" htmlFor="all-day">
               {" "}
