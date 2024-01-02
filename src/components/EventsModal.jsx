@@ -30,7 +30,7 @@ const EventsModal = ({ day, isModalOpen, setIsModalOpen, children }) => {
                 &times;
               </button>
             </div>
-            <EventForm />
+            <EventForm day={day} />
           </div>
         </div>
       </ReactModal>
