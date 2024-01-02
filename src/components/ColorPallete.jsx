@@ -35,6 +35,20 @@ const theme = createTheme({
   },
 });
 
+const colorArray = [
+  "tomato",
+  "flamingo",
+  "tangerine",
+  "banana",
+  "sage",
+  "basil",
+  "peacock",
+  "blueberry",
+  "lavender",
+  "grape",
+  "graphite",
+];
+
 const ColorPallete = ({ register }) => {
   const [color, setColor] = useState("tomato");
   const handleColorChange = (event) => {
@@ -56,73 +70,21 @@ const ColorPallete = ({ register }) => {
               label="Color"
               onChange={handleColorChange}
             >
-              <MenuItem value="tomato">
-                <div className="flex gap-1 justify-center">
-                  <div className="min-w-4 min-h-4 max-w-4 max-h-4 rounded-full bg-tomato"></div>
-                  <span className="italic text-xs">"Tomato"</span>
-                </div>
-              </MenuItem>
-
-              <MenuItem value="flamino">
-                <div className="flex gap-1 justify-center">
-                  <div className="min-w-4 min-h-4 max-w-4 max-h-4 rounded-full bg-flamingo"></div>
-                  <span className="italic text-xs">"Flamingo"</span>
-                </div>
-              </MenuItem>
-              <MenuItem value="tangerine">
-                <div className="flex gap-1 justify-center">
-                  <div className="min-w-4 min-h-4 max-w-4 max-h-4 rounded-full bg-tangerine"></div>
-                  <span className="italic text-xs">"Tangerine"</span>
-                </div>
-              </MenuItem>
-              <MenuItem value="banana">
-                <div className="flex gap-1 justify-center">
-                  <div className="min-w-4 min-h-4 max-w-4 max-h-4 rounded-full bg-banana"></div>
-                  <span className="italic text-xs">"Banana"</span>
-                </div>
-              </MenuItem>
-              <MenuItem value="sage">
-                <div className="flex gap-1 justify-center">
-                  <div className="min-w-4 min-h-4 max-w-4 max-h-4 rounded-full bg-sage"></div>
-                  <span className="italic text-xs">"Sage"</span>
-                </div>
-              </MenuItem>
-              <MenuItem value="basil">
-                <div className="flex gap-1 justify-center">
-                  <div className="min-w-4 min-h-4 max-w-4 max-h-4 rounded-full bg-basil"></div>
-                  <span className="italic text-xs">"Basil"</span>
-                </div>
-              </MenuItem>
-              <MenuItem value="peacock">
-                <div className="flex gap-1 justify-center">
-                  <div className="min-w-4 min-h-4 max-w-4 max-h-4 rounded-full bg-peacock"></div>
-                  <span className="italic text-xs">"Peacock"</span>
-                </div>
-              </MenuItem>
-              <MenuItem value="blueberry">
-                <div className="flex gap-1 justify-center">
-                  <div className="min-w-4 min-h-4 max-w-4 max-h-4 rounded-full bg-blueberry"></div>
-                  <span className="italic text-xs">"Blueberry"</span>
-                </div>
-              </MenuItem>
-              <MenuItem value="lavender">
-                <div className="flex gap-1 justify-center">
-                  <div className="min-w-4 min-h-4 max-w-4 max-h-4 rounded-full bg-lavender"></div>
-                  <span className="italic text-xs">"Lavender"</span>
-                </div>
-              </MenuItem>
-              <MenuItem value="grape">
-                <div className="flex gap-1 justify-center">
-                  <div className="min-w-4 min-h-4 max-w-4 max-h-4 rounded-full bg-grape"></div>
-                  <span className="italic text-xs">"Grape"</span>
-                </div>
-              </MenuItem>
-              <MenuItem value="graphite">
-                <div className="flex gap-1 justify-center">
-                  <div className="min-w-4 min-h-4 max-w-4 max-h-4 rounded-full bg-graphite"></div>
-                  <span className="italic text-xs">"Graphite"</span>
-                </div>
-              </MenuItem>
+              {Array.isArray(colorArray) &&
+                colorArray.map((color, index) => {
+                  return (
+                    <MenuItem key={index} value={color}>
+                      <div className="flex gap-1 justify-center">
+                        <div
+                          className={`w-4  h-4 rounded-full bg-${color} `}
+                        ></div>
+                        <span className="italic text-xs capitalize">
+                          {color}
+                        </span>
+                      </div>
+                    </MenuItem>
+                  );
+                })}
             </Select>
           </FormControl>
         </ThemeProvider>
