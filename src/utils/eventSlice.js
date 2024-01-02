@@ -1,24 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const eventSlice = createSlice({
-    name: "event",
-    initialState: {
-       eventInfo: [ 
-        {color: null,
-        id: null,
-        name: null,
-        date: null,
-        allDay: false,
-        startTime: null,
-        endTime: null}   
-    ]
+  name: "event",
+  initialState: {
+    eventInfo: [],
+  },
+  reducers: {
+    setEvent: (state, action) => {
+      state.eventInfo.push(action.payload);
     },
-    reducers: {
-        setColor: (state, action) => {
-            state.eventInfo = action.payload
-        }
-    }
-})
+  },
+});
 
-export default eventSlice.reducer
-export const {setColor} = eventSlice.actions
+export default eventSlice.reducer;
+export const { setEvent } = eventSlice.actions;
